@@ -1,0 +1,17 @@
+{
+  "name": "hermeto-dev",
+  "build": {
+    "dockerfile": "Dockerfile",
+    // build context is the repo root so COPY requirements-extras.txt works
+    "context": ".."
+  },
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  // override the production ENTRYPOINT so the container stays alive
+  "overrideCommand": true,
+  "containerEnv": {
+    "PATH": "/devenv/bin:/usr/local/go/bin:/usr/local/bin:/usr/bin:/bin"
+  },
+  // only the editable install needs the live workspace — everything else is baked into the image
+  "postCreateCommand": "/devenv/bin/pip install -e /workspace --quiet"
+}

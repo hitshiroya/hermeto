@@ -78,3 +78,7 @@ cachi2.env
 
 hermeto-output/
 hermeto.env
+
+# dev container personal overrides — never commit these
+.devcontainer/devcontainer.local.json
+.devcontainer/local/
